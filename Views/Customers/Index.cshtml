@@ -1,0 +1,80 @@
+﻿@model PagedList.IPagedList<WebBasketDev.Data.Customer>
+@using PagedList.Mvc;
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Customers List</h2>
+
+
+<div class="row mb-3">
+    <div class="col-md-6">
+        @Html.ActionLink("Create New", "Create", null, new {@class="btn btn-primary"})
+    </div>
+    <div class="col-md-6">
+        <form method="get" class="form-inline float-right">
+            <div class="form-group">
+                <input type="text" name="search" class="form-control" placeholder="Search Customers" value="@Request.QueryString["search"]"/>
+
+            </div>
+            <button type="submit" class="btn btn-secondary ml-2">Search</button> 
+        </form>
+    </div>
+</div>
+
+<div class="table-responsive">
+    <table class="table table-bordered table-striped">
+        <tr>
+            <th>
+                @Html.ActionLink("Name", "Index", new {sortOrder=ViewBag.NameSortParam, search = Request.QueryString["search"] })
+            </th>
+            <th>
+                @Html.ActionLink("Mobile Number", "Index", new { sortOrder = ViewBag.MobileNumberSortParam, search = Request.QueryString["search"] })
+            </th>
+            <th>
+                @Html.ActionLink("Is Active", "Index", new { sortOrder = ViewBag.IsActiveSortParam, search = Request.QueryString["search"] })
+            </th>
+            <th>
+                @Html.ActionLink("Create Date", "Index", new { sortOrder = ViewBag.CreateDateSortParam, search = Request.QueryString["search"] })
+            </th>
+            <th>
+                @Html.ActionLink("Update Date", "Index", new { sortOrder = ViewBag.UpdateDateSortParam, search = Request.QueryString["search"] })
+            </th>
+            <th>Actions</th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.MobileNUmber)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.IsActive)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.CreatedDate)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.UpdatedDate)
+                </td>
+                <td>
+                    @Html.ActionLink("Edit", "Edit", new { id = item.Id }, new {@class="btn btn-sm btn-warning"}) |
+                    @Html.ActionLink("Details", "Details", new { id = item.Id }, new { @class = "btn btn-sm btn-info ml-1" }) |
+                    @Html.ActionLink("Delete", "Delete", new { id = item.Id }, new { @class = "btn btn-sm btn-danger ml-1" })
+                </td>
+            </tr>
+        }
+
+    </table>
+</div>
+<div class="pagination-conaitner">
+    @Html.PagedListPager(Model, page => Url.Action("Index", new { page, search = Request.QueryString["search"], sortOrder = Request.QueryString["sortOrder"] }), new PagedListRenderOptions { Display=PagedListDisplayMode.IfNeeded})
+</div>
+
+
+
