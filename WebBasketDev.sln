@@ -1,9 +1,9 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
-VisualStudioVersion = 17.13.35825.156 d17.13
+VisualStudioVersion = 17.13.35825.156
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebBasketDev", "WebBasketDev.csproj", "{E6EB4A0A-1C17-4DFD-AF69-3115CC0ADEB6}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebBasketDev", "..\WebBasketDev\WebBasketDev.csproj", "{E6EB4A0A-1C17-4DFD-AF69-3115CC0ADEB6}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
