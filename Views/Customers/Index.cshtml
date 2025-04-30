@@ -73,7 +73,7 @@
     </table>
 </div>
 <div class="pagination-conaitner">
-    @Html.PagedListPager(Model, page => Url.Action("Index", new { page, search = Request.QueryString["search"], sortOrder = Request.QueryString["sortOrder"] }), new PagedListRenderOptions { Display=PagedListDisplayMode.IfNeeded})
+    @Html.PagedListPager(Model, page => Url.Action("Index", new { sortOrder = Request.QueryString["sortOrder"], search = Request.QueryString["search"], page }), new PagedListRenderOptions { Display=PagedListDisplayMode.IfNeeded})
 </div>
 
 
