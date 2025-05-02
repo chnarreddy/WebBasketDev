@@ -18,19 +18,32 @@ namespace WebBasketDev.Controllers
         // GET: Customers
         public ActionResult Index(string sortOrder, string search, int? page)
         {
+            //ViewBag, ViewData, TempData
             ViewBag.NameSortParm = String.IsNullOrEmpty(sortOrder) ? "name_desc" : "";
             ViewBag.MobileSortParm = sortOrder == "MobileNumber" ? "mobile_desc" : "MobileNumber";
             ViewBag.IsActiveSortParm = sortOrder == "IsActive" ? "isactive_desc" : "IsActive";
             ViewBag.CreatedDateSortParm = sortOrder == "CreatedDate" ? "created_desc" : "CreatedDate";
             ViewBag.UpdatedDateSortParm = sortOrder == "UpdatedDate" ? "updated_desc" : "UpdatedDate";
+            int pageSize = 10;
+            int pageNumber = (page ?? 1);
 
             var customers = db.Customers.ToList();
 
-            if(!String.IsNullOrEmpty(search))
+            var customers1 = db.Customers
+                .OrderBy(c => c.Name) 
+                .Skip((pageNumber - 1) * pageSize)
+                .Take(pageSize)
+                .ToList();
+
+            if (!String.IsNullOrEmpty(search))
             {
                 customers = customers.Where(c => c.Name.Contains(search) || c.MobileNUmber.Contains(search)).ToList();
             }
+<<<<<<< HEAD
             
+=======
+            //If, esle if, else
+>>>>>>> testing
             switch (sortOrder)
             {
                 case "name_desc":
@@ -64,8 +77,48 @@ namespace WebBasketDev.Controllers
                     customers = customers.OrderBy(c => c.Name).ToList();
                     break;
             }
-            int pageSize = 10;
-            int pageNumber = (page ?? 1);
+
+            if (sortOrder == "name_desc")
+            {
+                customers = customers.OrderByDescending(c => c.Name).ToList();
+            }
+            else if (sortOrder == "MobileNumber")
+            {
+                customers = customers.OrderBy(c => c.MobileNUmber).ToList();
+            }
+            else if (sortOrder == "mobile_desc")
+            {
+                customers = customers.OrderByDescending(c => c.MobileNUmber).ToList();
+            }
+            else if (sortOrder == "IsActive")
+            {
+                customers = customers.OrderBy(c => c.IsActive).ToList();
+            }
+            else if (sortOrder == "isactive_desc")
+            {
+                customers = customers.OrderByDescending(c => c.IsActive).ToList();
+            }
+            else if (sortOrder == "CreatedDate")
+            {
+                customers = customers.OrderBy(c => c.CreatedDate).ToList();
+            }
+            else if (sortOrder == "created_desc")
+            {
+                customers = customers.OrderByDescending(c => c.CreatedDate).ToList();
+            }
+            else if (sortOrder == "Updatede")
+            {
+                customers = customers.OrderBy(c => c.UpdatedDate).ToList();
+            }
+            else if (sortOrder == "updated_desc")
+            {
+                customers = customers.OrderByDescending(c => c.UpdatedDate).ToList();
+            }
+            else
+            {
+                customers = customers.OrderBy(c => c.Name).ToList();
+            }
+            
 
             return View(customers.ToPagedList(pageNumber, pageSize));
         }
@@ -78,6 +131,7 @@ namespace WebBasketDev.Controllers
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
             Customer customer = db.Customers.Find(id);
+
             if (customer == null)
             {
                 return HttpNotFound();
