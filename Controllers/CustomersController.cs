@@ -30,7 +30,7 @@ namespace WebBasketDev.Controllers
             {
                 customers = customers.Where(c => c.Name.Contains(search) || c.MobileNUmber.Contains(search)).ToList();
             }
-
+            
             switch (sortOrder)
             {
                 case "name_desc":
