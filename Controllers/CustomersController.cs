@@ -18,6 +18,7 @@ namespace WebBasketDev.Controllers
         // GET: Customers
         public ActionResult Index(string sortOrder, string search, int? page)
         {
+            //ViewBag, ViewData, TempData
             ViewBag.NameSortParm = String.IsNullOrEmpty(sortOrder) ? "name_desc" : "";
             ViewBag.MobileSortParm = sortOrder == "MobileNumber" ? "mobile_desc" : "MobileNumber";
             ViewBag.IsActiveSortParm = sortOrder == "IsActive" ? "isactive_desc" : "IsActive";
