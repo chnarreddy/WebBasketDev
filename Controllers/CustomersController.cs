@@ -29,11 +29,11 @@ namespace WebBasketDev.Controllers
 
             var customers = db.Customers.ToList();
 
-            var customers1 = db.Customers
-                .OrderBy(c => c.Name) 
-                .Skip((pageNumber - 1) * pageSize)
-                .Take(pageSize)
-                .ToList();
+            //var customers1 = db.Customers               
+            //    .OrderBy(c => c.Name)                  // Sort customers by name (alphabetically) 
+            //    .Skip((pageNumber - 1) * pageSize)     // Skip records from previous pages
+            //    .Take(pageSize)                        // Take only the number of records for the current page
+            //    .ToList();                             // Execute the query and convert results to a list
 
             if (!String.IsNullOrEmpty(search))
             {
@@ -74,46 +74,46 @@ namespace WebBasketDev.Controllers
                     break;
             }
 
-            if (sortOrder == "name_desc")
-            {
-                customers = customers.OrderByDescending(c => c.Name).ToList();
-            }
-            else if (sortOrder == "MobileNumber")
-            {
-                customers = customers.OrderBy(c => c.MobileNUmber).ToList();
-            }
-            else if (sortOrder == "mobile_desc")
-            {
-                customers = customers.OrderByDescending(c => c.MobileNUmber).ToList();
-            }
-            else if (sortOrder == "IsActive")
-            {
-                customers = customers.OrderBy(c => c.IsActive).ToList();
-            }
-            else if (sortOrder == "isactive_desc")
-            {
-                customers = customers.OrderByDescending(c => c.IsActive).ToList();
-            }
-            else if (sortOrder == "CreatedDate")
-            {
-                customers = customers.OrderBy(c => c.CreatedDate).ToList();
-            }
-            else if (sortOrder == "created_desc")
-            {
-                customers = customers.OrderByDescending(c => c.CreatedDate).ToList();
-            }
-            else if (sortOrder == "Updatede")
-            {
-                customers = customers.OrderBy(c => c.UpdatedDate).ToList();
-            }
-            else if (sortOrder == "updated_desc")
-            {
-                customers = customers.OrderByDescending(c => c.UpdatedDate).ToList();
-            }
-            else
-            {
-                customers = customers.OrderBy(c => c.Name).ToList();
-            }
+        //    if (sortOrder == "name_desc")
+        //    {
+        //        customers = customers.OrderByDescending(c => c.Name).ToList();
+        //    }
+        //    else if (sortOrder == "MobileNumber")
+        //    {
+        //        customers = customers.OrderBy(c => c.MobileNUmber).ToList();
+        //    }
+        //    else if (sortOrder == "mobile_desc")
+        //    {
+        //        customers = customers.OrderByDescending(c => c.MobileNUmber).ToList();
+        //    }
+        //    else if (sortOrder == "IsActive")
+        //    {
+        //        customers = customers.OrderBy(c => c.IsActive).ToList();
+        //    }
+        //    else if (sortOrder == "isactive_desc")
+        //    {
+        //        customers = customers.OrderByDescending(c => c.IsActive).ToList();
+        //    }
+        //    else if (sortOrder == "CreatedDate")
+        //    {
+        //        customers = customers.OrderBy(c => c.CreatedDate).ToList();
+        //    }
+        //    else if (sortOrder == "created_desc")
+        //    {
+        //        customers = customers.OrderByDescending(c => c.CreatedDate).ToList();
+        //    }
+        //    else if (sortOrder == "Updatede")
+        //    {
+        //        customers = customers.OrderBy(c => c.UpdatedDate).ToList();
+        //    }
+        //    else if (sortOrder == "updated_desc")
+        //    {
+        //        customers = customers.OrderByDescending(c => c.UpdatedDate).ToList();
+        //    }
+        //    else
+        //    {
+        //        customers = customers.OrderBy(c => c.Name).ToList();
+        //    }
             
 
             return View(customers.ToPagedList(pageNumber, pageSize));
