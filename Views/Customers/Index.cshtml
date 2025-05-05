@@ -11,7 +11,7 @@
 
 <div class="row mb-3">
     <div class="col-md-6">
-        @Html.ActionLink("Create New", "Create", null, new { @class = "btn btn-primary" })
+        @Html.ActionLink("Create New", "Create", null, new { @class = "btn btn-sm btn-primary" })
     </div>
     <div class="col-md-6">
         <form method="get" class="form-inline float-right">
@@ -67,16 +67,16 @@
                 <td>
                     @Html.ActionLink("Edit", "Edit", new { id = item.Id }, new { @class = "btn btn-sm btn-warning" }) |
                     @Html.ActionLink("Details", "Details", new { id = item.Id }, new { @class = "btn btn-sm btn-info ml-1" }) |
-                    @Html.ActionLink("Delete", "Delete", new { id = item.Id }, new { @class = "btn btn-sm btn-danger ml-1" })
+                    @Html.ActionLink("Delete", "Delete", new { id = item.Id }, new { @class = "btn btn-sm btn-danger ml-1" })|
+                  
                 </td>
             </tr>
         }
 
     </table>
 </div>
-<div class="pagination-conaitner">
-    @Html.PagedListPager(Model, page => Url.Action("Index", new { sortOrder = Request.QueryString["sortOrder"], search = Request.QueryString["search"], page }), new PagedListRenderOptions { Display=PagedListDisplayMode.IfNeeded})
-<div class="pagination-contaner">
+ 
+<div class="pagination-container">
     @Html.PagedListPager(Model, page => Url.Action("Index", new { page, search = Request.QueryString["search"], sortOrder = Request.QueryString["sortOrder"] }), new PagedListRenderOptions { Display = PagedListDisplayMode.IfNeeded })
 </div>
 
