@@ -18,7 +18,19 @@ namespace WebBasketDev.Controllers
         // GET: Customers
         public ActionResult Index(string sortOrder, string search, int? page)
         {
-            //ViewBag, ViewData, TempData
+
+
+            //ViewBag
+            ViewBag.TestData= "Test Data";//String, Int, Numeric,etc..
+
+            //ViewData
+            ViewData["TestViewData"] = "Test View DATA";//string
+
+            //TempData
+            TempData["TempData"] = "Test Temp Data";
+
+
+
             ViewBag.NameSortParm = String.IsNullOrEmpty(sortOrder) ? "name_desc" : "";
             ViewBag.MobileSortParm = sortOrder == "MobileNumber" ? "mobile_desc" : "MobileNumber";
             ViewBag.IsActiveSortParm = sortOrder == "IsActive" ? "isactive_desc" : "IsActive";
@@ -26,8 +38,25 @@ namespace WebBasketDev.Controllers
             ViewBag.UpdatedDateSortParm = sortOrder == "UpdatedDate" ? "updated_desc" : "UpdatedDate";
             int pageSize = 10;
             int pageNumber = (page ?? 1);
+            //select * from Customers order by Name asc -- SQL
+            var customers = db.Customers.ToList();//LinQ
 
-            var customers = db.Customers.ToList();
+
+            //var orders = db.Orders.ToList();//Tolist();
+
+            var user = db.Users.ToList();//Tolist(); It will return the all records from the table, if records are there it eill return null.
+
+            var isValideUser1 = db.Users.Where(u => u.UserName == "naresh3" && u.Password == "admin123").FirstOrDefault();//If data presnt in table, it will return  the 1 row of data otherwise return the "null"
+            var isValideUser = db.Users.Where(u => u.UserName == "naresh" && u.Password == "admin123").First();//If data presnt in table, it will return the 1 row of data otherwise trow the "error"
+
+
+            var isValideUser2 = db.Users.Where(u => u.UserName == "naresh4" && u.Password == "admin123").SingleOrDefault();//Here no 0f rows should be present in the table, if 0 rows are present it will return "null" if 2 rows present it will throw an error.
+            var isValideUser3 = db.Users.Where(u => u.UserName == "naresh4" && u.Password == "admin123").Single();//Here with data combination atleast 1 row should  be present in the table, if 0 rows are present it will throw an error if 2 rows present it will throw an error.
+
+
+
+
+            //var orderaSingleOrDefault=.
 
             var customers1 = db.Customers
                 .OrderBy(c => c.Name) 
