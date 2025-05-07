@@ -121,49 +121,6 @@ namespace WebBasketDev.Controllers
                     break;
             }
 
-<<<<<<< HEAD
-        //    if (sortOrder == "name_desc")
-        //    {
-        //        customers = customers.OrderByDescending(c => c.Name).ToList();
-        //    }
-        //    else if (sortOrder == "MobileNumber")
-        //    {
-        //        customers = customers.OrderBy(c => c.MobileNUmber).ToList();
-        //    }
-        //    else if (sortOrder == "mobile_desc")
-        //    {
-        //        customers = customers.OrderByDescending(c => c.MobileNUmber).ToList();
-        //    }
-        //    else if (sortOrder == "IsActive")
-        //    {
-        //        customers = customers.OrderBy(c => c.IsActive).ToList();
-        //    }
-        //    else if (sortOrder == "isactive_desc")
-        //    {
-        //        customers = customers.OrderByDescending(c => c.IsActive).ToList();
-        //    }
-        //    else if (sortOrder == "CreatedDate")
-        //    {
-        //        customers = customers.OrderBy(c => c.CreatedDate).ToList();
-        //    }
-        //    else if (sortOrder == "created_desc")
-        //    {
-        //        customers = customers.OrderByDescending(c => c.CreatedDate).ToList();
-        //    }
-        //    else if (sortOrder == "Updatede")
-        //    {
-        //        customers = customers.OrderBy(c => c.UpdatedDate).ToList();
-        //    }
-        //    else if (sortOrder == "updated_desc")
-        //    {
-        //        customers = customers.OrderByDescending(c => c.UpdatedDate).ToList();
-        //    }
-        //    else
-        //    {
-        //        customers = customers.OrderBy(c => c.Name).ToList();
-        //    }
-=======
-            //Compare between If, Else if, Else & Swtch case.
             if (sortOrder == "name_desc")
             {
                 customers = customers.OrderByDescending(c => c.Name).ToList();
@@ -204,7 +161,6 @@ namespace WebBasketDev.Controllers
             {
                 customers = customers.OrderBy(c => c.Name).ToList();
             }
->>>>>>> testing
             
 
             return View(customers.ToPagedList(pageNumber, pageSize));
