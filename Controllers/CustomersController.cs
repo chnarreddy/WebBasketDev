@@ -1,9 +1,8 @@
-<<<<<<< HEAD
+
 ﻿using System;
-=======
+
 ﻿using PagedList;
 using System;
->>>>>>> testing
 using System.Collections.Generic;
 using System.Data;
 using System.Data.Entity;
@@ -20,11 +19,9 @@ namespace WebBasketDev.Controllers
         private BasketDBEntities db = new BasketDBEntities();
 
         // GET: Customers
-<<<<<<< HEAD
         public ActionResult Index()
         {
             return View(db.Customers.ToList());
-=======
         public ActionResult Index(string sortOrder, string search, int? page)
         {
             //ViewBag, ViewData, TempData
@@ -126,7 +123,6 @@ namespace WebBasketDev.Controllers
             
 
             return View(customers.ToPagedList(pageNumber, pageSize));
->>>>>>> testing
         }
 
         // GET: Customers/Details/5
@@ -137,10 +133,7 @@ namespace WebBasketDev.Controllers
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
             Customer customer = db.Customers.Find(id);
-<<<<<<< HEAD
-=======
 
->>>>>>> testing
             if (customer == null)
             {
                 return HttpNotFound();
