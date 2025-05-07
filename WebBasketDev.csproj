@@ -190,6 +190,9 @@
     <Compile Include="Data\OrderStatu.cs">
       <DependentUpon>WebBasketDB.tt</DependentUpon>
     </Compile>
+    <Compile Include="Data\User.cs">
+      <DependentUpon>WebBasketDB.tt</DependentUpon>
+    </Compile>
     <Compile Include="Data\WebBasketDB.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>

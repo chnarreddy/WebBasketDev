@@ -14,6 +14,7 @@
         <AssociationConnector Association="BasketDBModel.fk_OrderDetails_Items" ManuallyRouted="false" />
         <AssociationConnector Association="BasketDBModel.FK__OrderDeta__Order__5DCAEF64" ManuallyRouted="false" />
         <AssociationConnector Association="BasketDBModel.FK__Orders__OrderSta__5AEE82B9" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="BasketDBModel.User" Width="1.5" PointX="5.375" PointY="5.75" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
