@@ -1,10 +1,12 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="15.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+<<<<<<< HEAD
   <Import Project="packages\EntityFramework.6.5.1\build\EntityFramework.props" Condition="Exists('packages\EntityFramework.6.5.1\build\EntityFramework.props')" />
 
 
+=======
+>>>>>>> testing
   <Import Project="packages\EntityFramework.6.5.1\build\EntityFramework.props" Condition="Exists('packages\EntityFramework.6.5.1\build\EntityFramework.props')" />
-
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
@@ -196,6 +198,9 @@
       <DependentUpon>WebBasketDB.tt</DependentUpon>
     </Compile>
     <Compile Include="Data\OrderStatu.cs">
+      <DependentUpon>WebBasketDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Data\User.cs">
       <DependentUpon>WebBasketDB.tt</DependentUpon>
     </Compile>
     <Compile Include="Data\WebBasketDB.Context.cs">
