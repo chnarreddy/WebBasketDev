@@ -21,5 +21,6 @@ namespace WebBasketDev.Data
         public bool IsActive { get; set; }
         public System.DateTime CreatedDate { get; set; }
         public Nullable<System.DateTime> UpdatedDate { get; set; }
+        public string Gender { get; set; }
     }
 }
