@@ -1,4 +1,9 @@
+<<<<<<< HEAD
 ﻿using System;
+=======
+﻿using PagedList;
+using System;
+>>>>>>> testing
 using System.Collections.Generic;
 using System.Data;
 using System.Data.Entity;
@@ -15,9 +20,113 @@ namespace WebBasketDev.Controllers
         private BasketDBEntities db = new BasketDBEntities();
 
         // GET: Customers
+<<<<<<< HEAD
         public ActionResult Index()
         {
             return View(db.Customers.ToList());
+=======
+        public ActionResult Index(string sortOrder, string search, int? page)
+        {
+            //ViewBag, ViewData, TempData
+            ViewBag.NameSortParm = String.IsNullOrEmpty(sortOrder) ? "name_desc" : "";
+            ViewBag.MobileSortParm = sortOrder == "MobileNumber" ? "mobile_desc" : "MobileNumber";
+            ViewBag.IsActiveSortParm = sortOrder == "IsActive" ? "isactive_desc" : "IsActive";
+            ViewBag.CreatedDateSortParm = sortOrder == "CreatedDate" ? "created_desc" : "CreatedDate";
+            ViewBag.UpdatedDateSortParm = sortOrder == "UpdatedDate" ? "updated_desc" : "UpdatedDate";
+            int pageSize = 10;
+            int pageNumber = (page ?? 1);
+
+            var customers = db.Customers.ToList();
+
+            var customers1 = db.Customers
+                .OrderBy(c => c.Name) 
+                .Skip((pageNumber - 1) * pageSize)
+                .Take(pageSize)
+                .ToList();
+
+            if (!String.IsNullOrEmpty(search))
+            {
+                customers = customers.Where(c => c.Name.Contains(search) || c.MobileNUmber.Contains(search)).ToList();
+            }
+            //If, esle if, else
+            switch (sortOrder)
+            {
+                case "name_desc":
+                    customers = customers.OrderByDescending(c => c.Name).ToList();
+                    break;
+                case "MobileNumber":
+                    customers = customers.OrderBy(c => c.MobileNUmber).ToList();
+                    break;
+                case "mobile_desc":
+                    customers = customers.OrderByDescending(c => c.MobileNUmber).ToList();
+                    break;
+                case "IsActive":
+                    customers = customers.OrderBy(c => c.IsActive).ToList();
+                    break;
+                case "isactive_desc":
+                    customers = customers.OrderByDescending(c => c.IsActive).ToList();
+                    break;
+                case "CreatedDate":
+                    customers = customers.OrderBy(c => c.CreatedDate).ToList();
+                    break;
+                case "created_desc":
+                    customers = customers.OrderByDescending(c => c.CreatedDate).ToList();
+                    break;
+                case "Updatede":
+                    customers = customers.OrderBy(c => c.UpdatedDate).ToList();
+                    break;
+                case "updated_desc":
+                    customers = customers.OrderByDescending(c => c.UpdatedDate).ToList();
+                    break;
+                default:
+                    customers = customers.OrderBy(c => c.Name).ToList();
+                    break;
+            }
+
+            if (sortOrder == "name_desc")
+            {
+                customers = customers.OrderByDescending(c => c.Name).ToList();
+            }
+            else if (sortOrder == "MobileNumber")
+            {
+                customers = customers.OrderBy(c => c.MobileNUmber).ToList();
+            }
+            else if (sortOrder == "mobile_desc")
+            {
+                customers = customers.OrderByDescending(c => c.MobileNUmber).ToList();
+            }
+            else if (sortOrder == "IsActive")
+            {
+                customers = customers.OrderBy(c => c.IsActive).ToList();
+            }
+            else if (sortOrder == "isactive_desc")
+            {
+                customers = customers.OrderByDescending(c => c.IsActive).ToList();
+            }
+            else if (sortOrder == "CreatedDate")
+            {
+                customers = customers.OrderBy(c => c.CreatedDate).ToList();
+            }
+            else if (sortOrder == "created_desc")
+            {
+                customers = customers.OrderByDescending(c => c.CreatedDate).ToList();
+            }
+            else if (sortOrder == "Updatede")
+            {
+                customers = customers.OrderBy(c => c.UpdatedDate).ToList();
+            }
+            else if (sortOrder == "updated_desc")
+            {
+                customers = customers.OrderByDescending(c => c.UpdatedDate).ToList();
+            }
+            else
+            {
+                customers = customers.OrderBy(c => c.Name).ToList();
+            }
+            
+
+            return View(customers.ToPagedList(pageNumber, pageSize));
+>>>>>>> testing
         }
 
         // GET: Customers/Details/5
@@ -28,6 +137,10 @@ namespace WebBasketDev.Controllers
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
             Customer customer = db.Customers.Find(id);
+<<<<<<< HEAD
+=======
+
+>>>>>>> testing
             if (customer == null)
             {
                 return HttpNotFound();
