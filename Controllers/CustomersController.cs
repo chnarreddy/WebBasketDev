@@ -42,19 +42,19 @@ namespace WebBasketDev.Controllers
             int pageSize = 10;
             int pageNumber = (page ?? 1);
             //select * from Customers order by Name asc -- SQL
-            var customers = db.Customers.ToList();//LinQ
+            var customer = db.Customers.ToList();//LinQ
 
 
             var orders = db.Orders.ToList();//Tolist();
 
             var user = db.Users.ToList();//Tolist(); It will return the all records from the table, if records are there it eill return null.
 
-            var isValideUser1 = db.Users.Where(u => u.UserName == "naresh3" && u.Password == "admin123").FirstOrDefault();//If data presnt in table, it will return  the 1 row of data otherwise return the "null"
-            var isValideUser = db.Users.Where(u => u.UserName == "naresh" && u.Password == "admin123").First();//If data presnt in table, it will return the 1 row of data otherwise trow the "error"
+            var isValideUser1 = db.Users.Where(u => u.UserName == "Srivatsav" && u.Password == "admin123").FirstOrDefault();//If data presnt in table, it will return  the 1 row of data otherwise return the "null"
+            var isValideUser = db.Users.Where(u => u.UserName == "Anoushka" && u.Password == "admin123").First();//If data presnt in table, it will return the 1 row of data otherwise trow the "error"
 
 
-            var isValideUser2 = db.Users.Where(u => u.UserName == "naresh4" && u.Password == "admin123").SingleOrDefault();//Here no 0f rows should be present in the table, if 0 rows are present it will return "null" if 2 rows present it will throw an error.
-            var isValideUser3 = db.Users.Where(u => u.UserName == "naresh4" && u.Password == "admin123").Single();//Here with data combination atleast 1 row should  be present in the table, if 0 rows are present it will throw an error if 2 rows present it will throw an error.
+            var isValideUser2 = db.Users.Where(u => u.UserName == "Hariteja" && u.Password == "admin123").SingleOrDefault();//Here no 0f rows should be present in the table, if 0 rows are present it will return "null" if 2 rows present it will throw an error.
+            var isValideUser3 = db.Users.Where(u => u.UserName == "srivatsav2" && u.Password == "admin123").Single();//Here with data combination atleast 1 row should  be present in the table, if 0 rows are present it will throw an error if 2 rows present it will throw an error.
 
 
             //Practice for Linq with OrderBy, ThenBy
@@ -84,86 +84,86 @@ namespace WebBasketDev.Controllers
 
             if (!String.IsNullOrEmpty(search))
             {
-                customers = customers.Where(c => c.Name.Contains(search) || c.MobileNUmber.Contains(search)).ToList();
+                customer = customer.Where(c => c.Name.Contains(search) || c.MobileNUmber.Contains(search)).ToList();
             }
             //If, esle if, else
             switch (sortOrder)
             {
                 case "name_desc":
-                    customers = customers.OrderByDescending(c => c.Name).ToList();
+                    customer = customer.OrderByDescending(c => c.Name).ToList();
                     break;
                 case "MobileNumber":
-                    customers = customers.OrderBy(c => c.MobileNUmber).ToList();
+                    customer = customer.OrderBy(c => c.MobileNUmber).ToList();
                     break;
                 case "mobile_desc":
-                    customers = customers.OrderByDescending(c => c.MobileNUmber).ToList();
+                    customer = customer.OrderByDescending(c => c.MobileNUmber).ToList();
                     break;
                 case "IsActive":
-                    customers = customers.OrderBy(c => c.IsActive).ToList();
+                    customer = customer.OrderBy(c => c.IsActive).ToList();
                     break;
                 case "isactive_desc":
-                    customers = customers.OrderByDescending(c => c.IsActive).ToList();
+                    customer = customer.OrderByDescending(c => c.IsActive).ToList();
                     break;
                 case "CreatedDate":
-                    customers = customers.OrderBy(c => c.CreatedDate).ToList();
+                    customer = customer.OrderBy(c => c.CreatedDate).ToList();
                     break;
                 case "created_desc":
-                    customers = customers.OrderByDescending(c => c.CreatedDate).ToList();
+                    customer = customer.OrderByDescending(c => c.CreatedDate).ToList();
                     break;
                 case "Updatede":
-                    customers = customers.OrderBy(c => c.UpdatedDate).ToList();
+                    customer = customer.OrderBy(c => c.UpdatedDate).ToList();
                     break;
                 case "updated_desc":
-                    customers = customers.OrderByDescending(c => c.UpdatedDate).ToList();
+                    customer = customer.OrderByDescending(c => c.UpdatedDate).ToList();
                     break;
                 default:
-                    customers = customers.OrderBy(c => c.Name).ToList();
+                    customer = customer.OrderBy(c => c.Name).ToList();
                     break;
             }
 
             if (sortOrder == "name_desc")
             {
-                customers = customers.OrderByDescending(c => c.Name).ToList();
+                customer = customer.OrderByDescending(c => c.Name).ToList();
             }
             else if (sortOrder == "MobileNumber")
             {
-                customers = customers.OrderBy(c => c.MobileNUmber).ToList();
+                customer = customer.OrderBy(c => c.MobileNUmber).ToList();
             }
             else if (sortOrder == "mobile_desc")
             {
-                customers = customers.OrderByDescending(c => c.MobileNUmber).ToList();
+                customer = customer.OrderByDescending(c => c.MobileNUmber).ToList();
             }
             else if (sortOrder == "IsActive")
             {
-                customers = customers.OrderBy(c => c.IsActive).ToList();
+                customer = customer.OrderBy(c => c.IsActive).ToList();
             }
             else if (sortOrder == "isactive_desc")
             {
-                customers = customers.OrderByDescending(c => c.IsActive).ToList();
+                customer = customer.OrderByDescending(c => c.IsActive).ToList();
             }
             else if (sortOrder == "CreatedDate")
             {
-                customers = customers.OrderBy(c => c.CreatedDate).ToList();
+                customer = customer.OrderBy(c => c.CreatedDate).ToList();
             }
             else if (sortOrder == "created_desc")
             {
-                customers = customers.OrderByDescending(c => c.CreatedDate).ToList();
+                customer = customer.OrderByDescending(c => c.CreatedDate).ToList();
             }
             else if (sortOrder == "Updatede")
             {
-                customers = customers.OrderBy(c => c.UpdatedDate).ToList();
+                customer = customer.OrderBy(c => c.UpdatedDate).ToList();
             }
             else if (sortOrder == "updated_desc")
             {
-                customers = customers.OrderByDescending(c => c.UpdatedDate).ToList();
+                customer = customer.OrderByDescending(c => c.UpdatedDate).ToList();
             }
             else
             {
-                customers = customers.OrderBy(c => c.Name).ToList();
+                customer = customer.OrderBy(c => c.Name).ToList();
             }
             
 
-            return View(customers.ToPagedList(pageNumber, pageSize));
+            return View(customer.ToPagedList(pageNumber, pageSize));
         }
 
         // GET: Customers/Details/5

@@ -17,7 +17,7 @@ namespace WebBasketDev.Data
         public int Id { get; set; }
         public string UserName { get; set; }
         public string Password { get; set; }
-        public string MobileNUmber { get; set; }
+        public string MobileNumber { get; set; }
         public bool IsActive { get; set; }
         public System.DateTime CreatedDate { get; set; }
         public Nullable<System.DateTime> UpdatedDate { get; set; }
