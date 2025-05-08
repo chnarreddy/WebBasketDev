@@ -1,17 +1,20 @@
-
 ﻿@model PagedList.IPagedList<WebBasketDev.Data.Customer>
 @using PagedList.Mvc;
-
 @{
     ViewBag.Title = "Index";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>Customers List</h2>
+<h2>@ViewBag.TestData</h2>
+
+<h2>@ViewData["TestViewData"] </h2>
+
+<h2>@TempData["TempData"]</h2>
+
 
 <div class="row mb-3">
     <div class="col-md-6">
-        @Html.ActionLink("Create New", "Create", null, new { @class = "btn btn-sm btn-info" })
+        @Html.ActionLink("Create New", "Create", null, new { @class = "btn btn-primary" })
     </div>
     <div class="col-md-6">
         <form method="get" class="form-inline float-right">
@@ -23,14 +26,13 @@
         </form>
     </div>
 </div>
+
 <div class="table-responsive">
     <table class="table table-bordered table-striped">
-
         <tr>
             <th>
-                @Html.ActionLink("Name", "Index", new { sortOrder = ViewBag.NameSortParm })
+                @Html.ActionLink("Name", "Index", new { sortOrder = ViewBag.NameSortParam, search = Request.QueryString["search"] })
             </th>
-
             <th>
                 @Html.ActionLink("Mobile Number", "Index", new { sortOrder = ViewBag.MobileNumberSortParam, search = Request.QueryString["search"] })
             </th>
@@ -73,12 +75,7 @@
         }
 
     </table>
-    </div>
-       
-        <div class="pagination-conaitner">
-            @Html.PagedListPager(Model, page => Url.Action("Index", new { sortOrder = Request.QueryString["sortOrder"], search = Request.QueryString["search"], page }), new PagedListRenderOptions { Display = PagedListDisplayMode.IfNeeded })
-        </div>
-
-
-
-      
+</div>
+<div class="pagination-conaitner">
+    @Html.PagedListPager(Model, page => Url.Action("Index", new { sortOrder = Request.QueryString["sortOrder"], search = Request.QueryString["search"], page }), new PagedListRenderOptions { Display = PagedListDisplayMode.IfNeeded })
+</div>
