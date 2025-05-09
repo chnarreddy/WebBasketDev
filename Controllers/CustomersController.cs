@@ -66,8 +66,8 @@ namespace WebBasketDev.Controllers
             var userGroupByOrderByDesc = db.Users.GroupBy(u => u.Gender).OrderByDescending(y => y.Key).ToList();//Desc
 
             //SQL Query for same above Linq Query
-//            select TOP 1 * from Users order by UserName--ASC
-//select TOP 1 * from Users order by UserName desc--DESC
+            //            select TOP 1 * from Users order by UserName--ASC
+            //select TOP 1 * from Users order by UserName desc--DESC
             //            select DISTINCT UserName from Users
 
             //Select   u.Gender from Users u
@@ -75,7 +75,9 @@ namespace WebBasketDev.Controllers
             //ORDER by u.UserName ASC
 
             //var orderaSingleOrDefault=.
-
+    //        var sortedcustomer = customers
+    //.OrderBy(c => c.FirstName)
+    //.ThenBy(c => c.LastName);
             //var customers1 = db.Customers
             //    .OrderBy(c => c.Name)
             //    .Skip((pageNumber - 1) * pageSize)
