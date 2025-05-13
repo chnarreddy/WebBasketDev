@@ -58,6 +58,7 @@ namespace WebBasketDev.Controllers
 
 
             //Practice for Linq with OrderBy, ThenBy
+            
 
             //Topic for Group By + Order By
             var userGroupBy = db.Users.GroupBy(u => u.Gender).ToList();//Plain Group By

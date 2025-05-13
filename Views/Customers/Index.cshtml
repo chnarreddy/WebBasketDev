@@ -47,6 +47,10 @@
             <th>
                 @Html.ActionLink("Update Date", "Index", new { sortOrder = ViewBag.UpdateDateSortParam, search = Request.QueryString["search"] })
             </th>
+            <th>
+                @Html.ActionLink("city", "Index", new { sortOrder = ViewBag.UpdateDateSortParam, search = Request.QueryString["search"] })
+            </th>
+
             <th>Actions</th>
         </tr>
 
