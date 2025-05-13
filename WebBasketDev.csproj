@@ -249,6 +249,7 @@
       <DependentUpon>WebBasketDB.edmx</DependentUpon>
       <LastGenOutput>WebBasketDB.cs</LastGenOutput>
     </Content>
+    <Content Include="DB_Scripts\ScriptFile.sql" />
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />

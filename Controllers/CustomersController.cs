@@ -64,47 +64,7 @@ namespace WebBasketDev.Controllers
             ).FirstOrDefault();
 
 
-            //            --Create / Alter Stored Proc in SQL DB
-            //Alter Proc ValidateUser
-            //(
-            //@UserName nvarchar(100),
-            //@Password nvarchar(100)
-            //)
-            //As
-            //BEGIN
-
-
-            //IF((Select COUNT(*) from Users where UserName = @UserName and Password = @Password) > 1)
-            //BEGIN
-
-            //Select '0' as Result,'morethan one user exists, its not valid request.' as Message
-            //return;
-            //            END
-
-            //            ELSE IF((Select COUNT(*) from Users where UserName = @UserName and Password = @Password) = 0)
-            //BEGIN
-
-            //Select '0' as Result,'No user found' as Message
-            //RETURN;
-            //            END
-            //            Else if EXISTS(Select top 1 * from Users where UserName = @UserName and Password = @Password)
-            //            BEGIN
-            //            Select '1' as Result,'Valid User' as Message;
-            //            RETURN;
-            //            END
-            //            END
-
-            //--Exec SP Structure
-            //EXEC ValidateUser 'naresh3', 'admin123'
-
-
-            //            select* from Customers
-
-//            CREATE CLUSTERED INDEX Customers_Name_Mobilenumber
-//ON Customers(Name, MobileNUmber)
-
-//create NONCLUSTERED INDEX Customers_Mobilenumber_IsActive
-//on Customers(MobileNUmber, IsActive)
+ 
 
 
             var isValideUser = db.Users.Where(u => u.UserName == "naresh" && u.Password == "admin123").First();//If data presnt in table, it will return the 1 row of data otherwise trow the "error"
