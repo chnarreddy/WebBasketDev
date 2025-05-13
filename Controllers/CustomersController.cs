@@ -6,10 +6,13 @@ using System.Data;
 using System.Data.Entity;
 using System.Linq;
 using System.Net;
+using System.Reflection;
 using System.Security.Cryptography;
 using System.Text.RegularExpressions;
 using System.Web;
 using System.Web.Mvc;
+using System.Web.Services.Description;
+using System.Xml.Linq;
 using WebBasketDev.Data;
 
 namespace WebBasketDev.Controllers
@@ -50,10 +53,64 @@ namespace WebBasketDev.Controllers
             var user = db.Users.ToList();//Tolist(); It will return the all records from the table, if records are there it eill return null.
 
             var isValideUser1 = db.Users.Where(u => u.UserName == "naresh3" && u.Password == "admin123").FirstOrDefault();//If data presnt in table, it will return  the 1 row of data otherwise return the "null"
-            //var isValideUser = db.Users.Where(u => u.UserName == "naresh" && u.Password == "admin123").First();//If data presnt in table, it will return the 1 row of data otherwise trow the "error"
 
 
-            var isValideUser2 = db.Users.Where(u => u.UserName == "naresh4" && u.Password == "admin123").SingleOrDefault();//Here no 0f rows should be present in the table, if 0 rows are present it will return "null" if 2 rows present it will throw an error.
+
+            // Call a stored procedure to validate the user
+            var isValideUserSP = db.Database.SqlQuery<ResultModel>(
+                "EXEC ValidateUser @UserName, @Password",
+                new System.Data.SqlClient.SqlParameter("@UserName", "naresh"),
+                new System.Data.SqlClient.SqlParameter("@Password", "admin123")
+            ).FirstOrDefault();
+
+
+            //            --Create / Alter Stored Proc in SQL DB
+            //Alter Proc ValidateUser
+            //(
+            //@UserName nvarchar(100),
+            //@Password nvarchar(100)
+            //)
+            //As
+            //BEGIN
+
+
+            //IF((Select COUNT(*) from Users where UserName = @UserName and Password = @Password) > 1)
+            //BEGIN
+
+            //Select '0' as Result,'morethan one user exists, its not valid request.' as Message
+            //return;
+            //            END
+
+            //            ELSE IF((Select COUNT(*) from Users where UserName = @UserName and Password = @Password) = 0)
+            //BEGIN
+
+            //Select '0' as Result,'No user found' as Message
+            //RETURN;
+            //            END
+            //            Else if EXISTS(Select top 1 * from Users where UserName = @UserName and Password = @Password)
+            //            BEGIN
+            //            Select '1' as Result,'Valid User' as Message;
+            //            RETURN;
+            //            END
+            //            END
+
+            //--Exec SP Structure
+            //EXEC ValidateUser 'naresh3', 'admin123'
+
+
+            //            select* from Customers
+
+//            CREATE CLUSTERED INDEX Customers_Name_Mobilenumber
+//ON Customers(Name, MobileNUmber)
+
+//create NONCLUSTERED INDEX Customers_Mobilenumber_IsActive
+//on Customers(MobileNUmber, IsActive)
+
+
+            var isValideUser = db.Users.Where(u => u.UserName == "naresh" && u.Password == "admin123").First();//If data presnt in table, it will return the 1 row of data otherwise trow the "error"
+
+
+            //var isValideUser2 = db.Users.Where(u => u.UserName == "naresh4" && u.Password == "admin123").SingleOrDefault();//Here no 0f rows should be present in the table, if 0 rows are present it will return "null" if 2 rows present it will throw an error.
             //var isValideUser3 = db.Users.Where(u => u.UserName == "naresh4" && u.Password == "admin123").Single();//Here with data combination atleast 1 row should  be present in the table, if 0 rows are present it will throw an error if 2 rows present it will throw an error.
 
 
@@ -168,6 +225,12 @@ namespace WebBasketDev.Controllers
             
 
            return View(customers.ToPagedList(pageNumber, pageSize));
+        }
+
+        public class ResultModel
+        {
+            public string Result { get; set; }
+            public string Message { get; set; }
         }
 
         // GET: Customers/Details/5

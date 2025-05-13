@@ -22,5 +22,7 @@ namespace WebBasketDev.Data
         public System.DateTime CreatedDate { get; set; }
         public Nullable<System.DateTime> UpdatedDate { get; set; }
         public string Gender { get; set; }
+        public Nullable<int> Age { get; set; }
+        public string City { get; set; }
     }
 }
