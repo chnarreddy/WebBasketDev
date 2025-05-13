@@ -135,3 +135,21 @@ ON Customers (Name, MobileNUmber)
 
 CREATE NONCLUSTERED INDEX Customers_Mobilenumber_IsActive
 ON Customers (MobileNUmber, IsActive)
+
+
+
+IF NOT EXISTS(Select * from Users where UserName='Raman')
+BEGIN 
+Insert INTO Users(UserName, Password, MobileNUmber, IsActive, CreatedDate, UpdatedDate, Gender)
+VALUES('Raman', 'admin@123', '09876', 1, GETDATE(), GETDATE(), 'Male')
+END
+
+IF EXISTS(Select * from Users where UserName='Raman' and IsActive=0)
+BEGIN
+Update Users set IsActive=1 where UserName='Raman'
+END
+
+IF EXISTS(Select * from Users where UserName='Raman' and IsActive=1)
+BEGIN
+delete from Users where UserName='Raman'
+END
