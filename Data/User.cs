@@ -12,15 +12,15 @@ namespace WebBasketDev.Data
     using System;
     using System.Collections.Generic;
     
-    public partial class User
+    public partial class user
     {
-        public int Id { get; set; }
+        public int id { get; set; }
         public string UserName { get; set; }
         public string Password { get; set; }
-        public string MobileNUmber { get; set; }
-        public bool IsActive { get; set; }
-        public System.DateTime CreatedDate { get; set; }
-        public Nullable<System.DateTime> UpdatedDate { get; set; }
+        public string MobileNumber { get; set; }
+        public Nullable<bool> IsActive { get; set; }
         public string Gender { get; set; }
+        public Nullable<System.DateTime> CreatedDate { get; set; }
+        public Nullable<System.DateTime> UpdatedDate { get; set; }
     }
 }

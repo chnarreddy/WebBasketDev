@@ -1,12 +1,5 @@
-<<<<<<< HEAD
-
-﻿using System;
-
-﻿using PagedList;
-=======
-﻿using Microsoft.AspNet.Identity;
+using Microsoft.AspNet.Identity;
 using PagedList;
->>>>>>> testing
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -18,7 +11,6 @@ using System.Text.RegularExpressions;
 using System.Web;
 using System.Web.Mvc;
 using WebBasketDev.Data;
-
 namespace WebBasketDev.Controllers
 {
     public class CustomersController : Controller
@@ -26,9 +18,11 @@ namespace WebBasketDev.Controllers
         private BasketDBEntities db = new BasketDBEntities();
 
         // GET: Customers
-        public ActionResult Index()
-        {
-            return View(db.Customers.ToList());
+        //public ActionResult Index()
+        //{
+        //    return View(db.Customers.ToList());
+        //}
+
         public ActionResult Index(string sortOrder, string search, int? page)
         {
 
@@ -57,23 +51,23 @@ namespace WebBasketDev.Controllers
 
             var orders = db.Orders.ToList();//Tolist();
 
-            var user = db.Users.ToList();//Tolist(); It will return the all records from the table, if records are there it eill return null.
+            var user = db.users.ToList();//Tolist(); It will return the all records from the table, if records are there it eill return null.
 
-            var isValideUser1 = db.Users.Where(u => u.UserName == "naresh3" && u.Password == "admin123").FirstOrDefault();//If data presnt in table, it will return  the 1 row of data otherwise return the "null"
-            var isValideUser = db.Users.Where(u => u.UserName == "naresh" && u.Password == "admin123").First();//If data presnt in table, it will return the 1 row of data otherwise trow the "error"
-
-
-            var isValideUser2 = db.Users.Where(u => u.UserName == "naresh4" && u.Password == "admin123").SingleOrDefault();//Here no 0f rows should be present in the table, if 0 rows are present it will return "null" if 2 rows present it will throw an error.
-            var isValideUser3 = db.Users.Where(u => u.UserName == "naresh4" && u.Password == "admin123").Single();//Here with data combination atleast 1 row should  be present in the table, if 0 rows are present it will throw an error if 2 rows present it will throw an error.
+            var isValideUser1 = db.users.Where(u => u.UserName == "Smith" && u.Password == "password123").FirstOrDefault();//If data presnt in table, it will return  the 1 row of data otherwise return the "null"
+            var isValideUser = db.users.Where(u => u.UserName == "Bob" && u.Password == "bob456").First();//If data presnt in table, it will return the 1 row of data otherwise trow the "error"
 
 
-            //Practice for Linq with OrderBy, ThenBy
+            var isValideUser2 = db.users.Where(u => u.UserName == "naresh4" && u.Password == "admin123").SingleOrDefault();//Here no 0f rows should be present in the table, if 0 rows are present it will return "null" if 2 rows present it will throw an error.
+            var isValideUser3 = db.users.Where(u => u.UserName == "naresh4" && u.Password == "admin123").Single();//Here with data combination atleast 1 row should  be present in the table, if 0 rows are present it will throw an error if 2 rows present it will throw an error.
+
+
+           //Practice for Linq with OrderBy, ThenBy
 
             //Topic for Group By + Order By
-            var userGroupBy = db.Users.GroupBy(u => u.Gender).ToList();//Plain Group By
-            var userGroupByOrderByASC = db.Users.GroupBy(u => u.Gender).OrderBy(y => y.Key).ToList();//ASC
+            var userGroupBy = db.users.GroupBy(u => u.Gender).ToList();//Plain Group By
+            var userGroupByOrderByASC = db.users.GroupBy(u => u.Gender).OrderBy(y => y.Key).ToList();//ASC
 
-            var userGroupByOrderByDesc = db.Users.GroupBy(u => u.Gender).OrderByDescending(y => y.Key).ToList();//Desc
+            var userGroupByOrderByDesc = db.users.GroupBy(u => u.Gender).OrderByDescending(y => y.Key).ToList();//Desc
 
             //SQL Query for same above Linq Query
 //            select TOP 1 * from Users order by UserName--ASC
@@ -86,15 +80,15 @@ namespace WebBasketDev.Controllers
 
             //var orderaSingleOrDefault=.
 
-            var customers1 = db.Customers
-                .OrderBy(c => c.Name) 
-                .Skip((pageNumber - 1) * pageSize)
-                .Take(pageSize)
-                .ToList();
+            //var customers1 = db.Customers
+            //    .OrderBy(c => c.Name) 
+            //    .Skip((pageNumber - 1) * pageSize)
+            //    .Take(pageSize)
+            //    .ToList();
 
             if (!String.IsNullOrEmpty(search))
             {
-                customers = customers.Where(c => c.Name.Contains(search) || c.MobileNUmber.Contains(search)).ToList();
+                customers = customers.Where(c => c.Name.Contains(search) || c.MobileNumber.Contains(search)).ToList();
             }
             //If, esle if, else
             switch (sortOrder)
@@ -103,10 +97,10 @@ namespace WebBasketDev.Controllers
                     customers = customers.OrderByDescending(c => c.Name).ToList();
                     break;
                 case "MobileNumber":
-                    customers = customers.OrderBy(c => c.MobileNUmber).ToList();
+                    customers = customers.OrderBy(c => c.MobileNumber).ToList();
                     break;
                 case "mobile_desc":
-                    customers = customers.OrderByDescending(c => c.MobileNUmber).ToList();
+                    customers = customers.OrderByDescending(c => c.MobileNumber).ToList();
                     break;
                 case "IsActive":
                     customers = customers.OrderBy(c => c.IsActive).ToList();
@@ -132,47 +126,47 @@ namespace WebBasketDev.Controllers
             }
 
             //Compare between If, Else if, Else & Swtch case.
-            if (sortOrder == "name_desc")
-            {
-                customers = customers.OrderByDescending(c => c.Name).ToList();
-            }
-            else if (sortOrder == "MobileNumber")
-            {
-                customers = customers.OrderBy(c => c.MobileNUmber).ToList();
-            }
-            else if (sortOrder == "mobile_desc")
-            {
-                customers = customers.OrderByDescending(c => c.MobileNUmber).ToList();
-            }
-            else if (sortOrder == "IsActive")
-            {
-                customers = customers.OrderBy(c => c.IsActive).ToList();
-            }
-            else if (sortOrder == "isactive_desc")
-            {
-                customers = customers.OrderByDescending(c => c.IsActive).ToList();
-            }
-            else if (sortOrder == "CreatedDate")
-            {
-                customers = customers.OrderBy(c => c.CreatedDate).ToList();
-            }
-            else if (sortOrder == "created_desc")
-            {
-                customers = customers.OrderByDescending(c => c.CreatedDate).ToList();
-            }
-            else if (sortOrder == "Updatede")
-            {
-                customers = customers.OrderBy(c => c.UpdatedDate).ToList();
-            }
-            else if (sortOrder == "updated_desc")
-            {
-                customers = customers.OrderByDescending(c => c.UpdatedDate).ToList();
-            }
-            else
-            {
-                customers = customers.OrderBy(c => c.Name).ToList();
-            }
-            
+ //           if (sortOrder == "name_desc")
+          //  {
+   //             customers = customers.OrderByDescending(c => c.Name).ToList();
+           // }
+     //       else if (sortOrder == "MobileNumber")
+     //     {
+     //       customers = customers.OrderBy(c => c.MobileNUmber).ToList();
+     // }
+            //else if (sortOrder == "mobile_desc")
+            //{
+            //    customers = customers.OrderByDescending(c => c.MobileNUmber).ToList();
+            //}
+            //else if (sortOrder == "IsActive")
+            //{
+            //    customers = customers.OrderBy(c => c.IsActive).ToList();
+            //}
+            //else if (sortOrder == "isactive_desc")
+            //{
+            //    customers = customers.OrderByDescending(c => c.IsActive).ToList();
+            //}
+            //else if (sortOrder == "CreatedDate")
+            //{
+            //    customers = customers.OrderBy(c => c.CreatedDate).ToList();
+            //}
+            //else if (sortOrder == "created_desc")
+            //{
+            //    customers = customers.OrderByDescending(c => c.CreatedDate).ToList();
+            //}
+            //else if (sortOrder == "Updatede")
+            //{
+            //    customers = customers.OrderBy(c => c.UpdatedDate).ToList();
+            //}
+            //else if (sortOrder == "updated_desc")
+            //{
+            //    customers = customers.OrderByDescending(c => c.UpdatedDate).ToList();
+            //}
+            //else
+            //{
+            //    customers = customers.OrderBy(c => c.Name).ToList();
+            //}
+
 
             return View(customers.ToPagedList(pageNumber, pageSize));
         }
