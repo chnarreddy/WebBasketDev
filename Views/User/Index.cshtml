@@ -1,0 +1,63 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+}
+<style>
+
+    textbold {
+        font-weight: bold;
+    }
+</style>
+
+
+<div class="col-md-12">
+
+    <div class="mb-3">
+        <label for="username" style="font-weight:bold" class="form-label textbold">User Name :</label>
+        <input type="text" name="username" id="userName" class="form-control " value="" />
+    </div>
+    <div class="mb-3">
+        <label for="password" style="font-weight:bold" class="form-label textbold">Password :</label>
+        <input type="password" name="password" id="password" class="form-control " value="" />
+    </div>
+    <div class="mb-3" style="padding-left:210px">
+        <button type="submit" name="Login" id="login" class="btn btn-outline-primary">Login</button>
+    </div>
+
+</div>
+<script src="~/Scripts/jquery-3.7.0.js"></script>
+<script src="~/Scripts/jquery-3.7.0.min.js"></script>
+<script type="text/javascript">
+
+    $(document).ready(function () {
+
+        $('#login').click(function () {
+
+            var userName = $('#userName').val();
+            var password = $('#password').val();
+
+            //alert(userName);
+            //alert(password);
+
+            $.ajax({
+                url: '/User/ValidateUserLogin',
+                type: 'POST',
+                data: { userName: userName, password: password },
+                success: function (response) {
+                    if (response.success == true) {
+                        //alert("Login Success");
+                        window.location.href = '/Customers/Index';
+                    }
+                    else {
+                        alert("Invalid UserName or Password");
+                    }
+                },
+
+
+            });
+
+        });
+
+    });
+
+</script>
