@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.Entity;
+using System.EnterpriseServices;
 using System.Linq;
 using System.Net;
 using System.Reflection;
@@ -67,7 +68,7 @@ namespace WebBasketDev.Controllers
  
 
 
-            var isValideUser = db.Users.Where(u => u.UserName == "naresh" && u.Password == "admin123").First();//If data presnt in table, it will return the 1 row of data otherwise trow the "error"
+            //var isValideUser = db.Users.Where(u => u.UserName == "naresh" && u.Password == "admin123").First();//If data presnt in table, it will return the 1 row of data otherwise trow the "error"
 
 
             //var isValideUser2 = db.Users.Where(u => u.UserName == "naresh4" && u.Password == "admin123").SingleOrDefault();//Here no 0f rows should be present in the table, if 0 rows are present it will return "null" if 2 rows present it will throw an error.
@@ -182,8 +183,9 @@ namespace WebBasketDev.Controllers
 
         public class ResultModel
         {
-            public string Result { get; set; }
-            public string Message { get; set; }
+            public string UserName { get; set; }
+            public int Id { get; set; }
+            public string Role { get; set; }
         }
 
         // GET: Customers/Details/5

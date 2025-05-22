@@ -162,3 +162,55 @@ IF EXISTS(Select * from Users where UserName='Raman' and IsActive=1)
 BEGIN
 delete from Users where UserName='Raman'
 END
+
+
+--Create Table
+drop table if exists #TEST
+--Temp table Approch 1
+CREATE TABLE #TEST
+(
+Id Int,
+Name nvarchar(50),
+DOB DATETIME
+)
+
+INSERT into #TEST(Id, Name, DOB)
+VALUES(1,'Test1', '2025-01-01'),
+(2,'Test2', '2025-01-01'),
+(3,'Test3', '2025-01-01'),
+(4,'Test5', '2025-01-01'),
+(5,'Test6', '2025-01-01')
+
+select * from #TEST
+--Approch 1 End
+
+--Approch 2
+select * into #TEST1 from Users where UserName='TEST1'
+--Temp table Approch 2 End
+
+
+--CTE Start
+
+;WITH CTE_Test as (
+
+Select 'CTE_Test' as test,UserName, Password, IsActive from Users where UserName='Test1'
+
+)
+select * from CTE_Test
+--CTE END
+
+--Merge
+MERGE INTO Users AS Target
+USING #TEST AS Source
+ON Target.UserName = Source.Name
+
+WHEN MATCHED THEN
+    UPDATE SET Target.IsActive = 1
+
+WHEN NOT MATCHED BY TARGET THEN
+    INSERT (UserName, Password, MobileNumber, IsActive, CreatedDate)
+    VALUES (Source.Name, '123', '123', 1, GETDATE())
+
+WHEN NOT MATCHED BY SOURCE THEN
+    DELETE;
+--Merge End
