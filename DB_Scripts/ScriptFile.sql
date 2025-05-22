@@ -1,6 +1,15 @@
 USE BasketDB
 GO
 
+--SQL Query for same above linq query            
+select TOP 1 * from Users order by UserName--ASC
+select TOP 1 * from Users order by UserName desc--DESc
+select DISTINCT UserName from Users
+
+ Select   u.Gender from Users u
+ GROUP By u.Gender
+ ORDER by u.UserName ASC
+
 --Joins
 --Inner Join
 --Left Join

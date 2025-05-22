@@ -50,9 +50,9 @@ namespace WebBasketDev.Controllers
 
             var orders = db.Orders.ToList();//Tolist();
 
-            var user = db.Users.ToList();//Tolist(); It will return the all records from the table, if records are there it eill return null.
+            //var user = db.Users.ToList();//Tolist(); It will return the all records from the table, if records are there it eill return null.
 
-            var isValideUser1 = db.Users.Where(u => u.UserName == "naresh3" && u.Password == "admin123").FirstOrDefault();//If data presnt in table, it will return  the 1 row of data otherwise return the "null"
+            //var isValideUser1 = db.Users.Where(u => u.UserName == "naresh3" && u.Password == "admin123").FirstOrDefault();//If data presnt in table, it will return  the 1 row of data otherwise return the "null"
 
 
 
@@ -60,7 +60,7 @@ namespace WebBasketDev.Controllers
             var isValideUserSP = db.Database.SqlQuery<ResultModel>(
                 "EXEC ValidateUser @UserName, @Password",
                 new System.Data.SqlClient.SqlParameter("@UserName", "naresh"),
-                new System.Data.SqlClient.SqlParameter("@Password", "admin123")
+               new System.Data.SqlClient.SqlParameter("@Password", "admin123")
             ).FirstOrDefault();
 
 
@@ -83,17 +83,10 @@ namespace WebBasketDev.Controllers
 
             var userGroupByOrderByDesc = db.Users.GroupBy(u => u.Gender).OrderByDescending(y => y.Key).ToList();//Desc
 
-            //SQL Query for same above Linq Query
-            //            select TOP 1 * from Users order by UserName--ASC
-            //select TOP 1 * from Users order by UserName desc--DESC
-            //            select DISTINCT UserName from Users
-
-            //Select   u.Gender from Users u
-            //GROUP By u.Gender
-            //ORDER by u.UserName ASC
+            
 
             //var orderaSingleOrDefault=.
-    //        var sortedcustomer = customers
+   //var sortedcustomer = customers
     //.OrderBy(c => c.FirstName)
     //.ThenBy(c => c.LastName);
             //var customers1 = db.Customers
